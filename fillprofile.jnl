@@ -1,0 +1,34 @@
+set mem/size=250
+set data/order=xyzt kpp.mon.500yr.nc
+
+set mode meta
+go split fill "nolab" "temp" 0 -200 -1000 0.7
+cancel mode meta
+sp Fprint -o temp_profile.ps -p portrait -l cps metafile.plt
+sp cat temp_profile.ps | ps2eps -B -s a4 > test.eps
+sp convert +antialias -density 720 test.eps -background  White -flatten temp_profile.png
+
+set mode meta
+go split fill "nolab" "sal" 0 -200 -1000 0.7
+cancel mode meta
+sp Fprint -o salt_profile.ps -p portrait -l cps metafile.plt
+sp cat salt_profile.ps | ps2eps -B -s a4 > test.eps
+sp convert +antialias -density 720 test.eps -background  White -flatten salt_profile.png
+
+set mode meta
+set window/aspect=0.5
+plot/k=40/nolab temp
+cancel mode meta
+sp Fprint -o sst_timeseries.ps -p portrait -l cps metafile.plt
+sp cat sst_timeseries.ps | ps2eps -B -s a4 > test.eps
+sp convert +antialias -density 720 test.eps -background  White -flatten sst_timeseries.png
+
+set mode meta
+set window/aspect=0.5
+plot/nolab hmix
+cancel mode meta
+sp Fprint -o hmix_timeseries.ps -p portrait -l cps metafile.plt
+sp cat hmix_timeseries.ps | ps2eps -B -s a4 > test.eps
+sp convert +antialias -density 720 test.eps -background  White -flatten hmix_timeseries.png
+
+sp rm -f metafile*

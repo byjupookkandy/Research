@@ -1,0 +1,26 @@
+This folder contains the first full version of the single point kpp model.
+1) For starting one can execute "run_kpp.sh", where you can specify the desired 
+latitude and longitude, which then extract initial condition netcdf data and
+generates noise forcing for 500 years (6 hourly time step)
+
+2) You can change "timestep.nml" file to control the number of iterations
+for flux correction.
+
+3) Set surface temperature/salinity restoring. changes are in ocn.f
+temp restoring = 10W/m2/K
+
+4) Look at "generate_6hrly_forcing.f" to make changes to noise force production
+
+5) If you are repeating the simulation with the same location and forces, please 
+use "run.sh" script to re-run the model
+
+6) Check byjas_1D_ocn.f (which is the main program) to see the flux-correction 
+subroutines. By default, it uses both seasonal and long-drift-trend correction.
+
+7) This code saves data monthly only, 6 hourly output is converted to monthly so
+that it reduces the time taken for simulation, also the size of the folder.
+
+Dt: 28-Jan-2016
+byju pookkandy : byjupbhaskar@gmail.com
+
+change log: flux correction in top 20 levels; 1.5 times wind-stress forcing

@@ -1,0 +1,44 @@
+set mem/size=250
+set data/order=xyt noise.force.mon.nc
+
+set mode meta
+set window/aspect=0.5
+plot/nolab taux_in
+cancel mode meta
+sp Fprint -o taux_timeseries.ps -p portrait -l cps metafile.plt
+sp cat taux_timeseries.ps | ps2eps -B -s a4 > test.eps
+sp convert +antialias -density 720 test.eps -background  White -flatten taux_timeseries.png
+
+set mode meta
+set window/aspect=0.5
+plot/nolab tauy_in
+cancel mode meta
+sp Fprint -o tauy_timeseries.ps -p portrait -l cps metafile.plt
+sp cat tauy_timeseries.ps | ps2eps -B -s a4 > test.eps
+sp convert +antialias -density 720 test.eps -background  White -flatten tauy_timeseries.png
+
+set mode meta
+set window/aspect=0.5
+plot/nolab solar_in
+cancel mode meta
+sp Fprint -o solar_timeseries.ps -p portrait -l cps metafile.plt
+sp cat solar_timeseries.ps | ps2eps -B -s a4 > test.eps
+sp convert +antialias -density 720 test.eps -background  White -flatten solar_timeseries.png
+
+set mode meta
+set window/aspect=0.5
+plot/nolab nsolar_in
+cancel mode meta
+sp Fprint -o nsolar_timeseries.ps -p portrait -l cps metafile.plt
+sp cat nsolar_timeseries.ps | ps2eps -B -s a4 > test.eps
+sp convert +antialias -density 720 test.eps -background  White -flatten nsolar_timeseries.png
+
+set mode meta
+set window/aspect=0.5
+plot/nolab pme_in
+cancel mode meta
+sp Fprint -o pme_timeseries.ps -p portrait -l cps metafile.plt
+sp cat pme_timeseries.ps | ps2eps -B -s a4 > test.eps
+sp convert +antialias -density 720 test.eps -background  White -flatten pme_timeseries.png
+
+sp rm -f metafile*
